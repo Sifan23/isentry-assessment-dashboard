@@ -5,6 +5,7 @@ import AppSidebar from "@/components/AppSidebar";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { ReactQueryProvider } from "@/components/providers/ReactQueryProvider";
 import { cookies } from "next/headers";
 
 const geistSans = Geist({
@@ -38,6 +39,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex`}
       >
+        <ReactQueryProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -53,6 +55,7 @@ export default async function RootLayout({
             </main>
           </SidebarProvider>
         </ThemeProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
