@@ -20,7 +20,16 @@ export type User = {
 export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "id",
-    header: "Id",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        No
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
+    cell: ({ row }) => row.index + 1,
   },
   {
     accessorKey: "name",
@@ -82,6 +91,6 @@ export const columns: ColumnDef<User>[] = [
   {
     id: "actions",
     header: "Actions",
-    cell: ({ row }) => <ActionCell user={row.original} />, 
+    cell: ({ row }) => <ActionCell user={row.original} />,
   },
 ];
