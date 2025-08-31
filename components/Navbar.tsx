@@ -38,28 +38,7 @@ const Navbar = () => {
         {/* Left: Sidebar Trigger and Search */}
         <div className="flex items-center gap-4">
           <SidebarTrigger />
-          {/* Search Input (Hidden on small screens) */}
-          <div className="relative hidden sm:flex">
-            <Search
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
-              size={16}
-            />
-            <Input
-              type="text"
-              placeholder="Search"
-              className="pl-10 pr-4 py-2 w-[200px] md:w-[250px] lg:w-[300px]"
-            />
-          </div>
-          {/* Search Icon (Visible on small screens) */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="sm:hidden"
-            onClick={toggleSearch}
-            aria-label={isSearchOpen ? "Close search" : "Open search"}
-          >
-            {isSearchOpen ? <X size={20} /> : <Search size={20} />}
-          </Button>
+          
         </div>
 
         {/* Right: Create Button, Notifications, Theme, User */}
