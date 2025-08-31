@@ -45,11 +45,6 @@ const items = [
     icon: Users,
   },
   {
-    title: "Posts",
-    url: "/posts",
-    icon: StickyNote,
-  },
-  {
     title: "Settings",
     url: "/settings",
     icon: Settings,
@@ -66,7 +61,7 @@ const AppSidebar = () => {
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Link href="/">
-                <Image src="" alt="logo" width={130} height={130} />
+                <Image src="/logo.png" alt="logo" width={130} height={130} />
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
