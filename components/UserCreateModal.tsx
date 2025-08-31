@@ -65,7 +65,7 @@ export default function UserCreateModal({ isOpen, onClose }: Props) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[400px] sm:w-[540px]">
+      <DialogContent className="w-[400px] sm:w-[540px] max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Add User</DialogTitle>
         </DialogHeader>
