@@ -1,11 +1,11 @@
-// components/KpiCard.tsx
+
 "use client";
-import React from "react";
+import React, {SVGProps} from "react";
 
 interface KpiCardProps {
   label: string;
   value: number;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<SVGProps<SVGSVGElement>>;
   bgColor: string;
   textColor: string;
 }
