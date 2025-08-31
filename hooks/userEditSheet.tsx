@@ -106,10 +106,11 @@ export default function UserEditSheet({ user, open, onClose,readOnly }: Props) {
               <Input
                 id={field}
                 {...register(field as keyof FormData)}
-                disabled={readOnly} // ✅ disable input in read-only mode
+                disabled={readOnly} 
+                className="mt-1"
               />
               {!readOnly && errors[field as keyof FormData] && (
-                <p className="text-red-500 text-sm">
+                <p className="text-red-500 text-sm mt-1">
                   {errors[field as keyof FormData]?.message as string}
                 </p>
               )}
