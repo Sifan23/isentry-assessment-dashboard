@@ -47,7 +47,7 @@ export default function Settings() {
       {/* Change Password Card */}
       <div className="p-4 border rounded-md shadow space-y-4">
         <h2 className="font-semibold">Change Password</h2>
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="currentPassword">Current Password</Label>
           <Input
             id="currentPassword"
@@ -56,7 +56,7 @@ export default function Settings() {
             onChange={(e) => setCurrentPassword(e.target.value)}
           />
         </div>
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="newPassword">New Password</Label>
           <Input
             id="newPassword"
@@ -65,7 +65,7 @@ export default function Settings() {
             onChange={(e) => setNewPassword(e.target.value)}
           />
         </div>
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="confirmPassword">Confirm Password</Label>
           <Input
             id="confirmPassword"
