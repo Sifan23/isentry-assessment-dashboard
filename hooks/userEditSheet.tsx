@@ -36,9 +36,10 @@ type Props = {
   user: User | null;
   open: boolean;
   onClose: () => void;
+  readOnly?: boolean;
 };
 
-export default function UserEditSheet({ user, open, onClose }: Props) {
+export default function UserEditSheet({ user, open, onClose,readOnly }: Props) {
   const queryClient = useQueryClient();
 
   const {
@@ -87,9 +88,11 @@ export default function UserEditSheet({ user, open, onClose }: Props) {
         className="w-[400px] sm:w-[540px] flex flex-col"
       >
         <SheetHeader>
-          <SheetTitle>Edit User</SheetTitle>
+          <SheetTitle>{readOnly ? "View User" : "Edit User"}</SheetTitle>
           <SheetDescription>
-            Update the user details and save changes.
+            {readOnly
+              ? "View the user details."
+              : "Update the user details and save changes."}
           </SheetDescription>
         </SheetHeader>
 
@@ -97,72 +100,33 @@ export default function UserEditSheet({ user, open, onClose }: Props) {
           onSubmit={handleSubmit((data) => mutation.mutate(data))}
           className="flex-1 overflow-y-auto px-4 py-4 space-y-4"
         >
-
-          <div>
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" {...register("name")} />
-            {errors.name && (
-              <p className="text-red-500 text-sm">{errors.name.message}</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="username">Username</Label>
-            <Input id="username" {...register("username")} />
-            {errors.username && (
-              <p className="text-red-500 text-sm">{errors.username.message}</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" {...register("email")} />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" {...register("phone")} />
-            {errors.phone && (
-              <p className="text-red-500 text-sm">{errors.phone.message}</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="website">Website</Label>
-            <Input id="website" {...register("website")} />
-            {errors.website && (
-              <p className="text-red-500 text-sm">{errors.website.message}</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="company">Company</Label>
-            <Input id="company" {...register("company")} />
-            {errors.company && (
-              <p className="text-red-500 text-sm">{errors.company.message}</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="city">City</Label>
-            <Input id="city" {...register("city")} />
-            {errors.city && (
-              <p className="text-red-500 text-sm">{errors.city.message}</p>
-            )}
-          </div>
+          {["name", "username", "email", "phone", "website", "company", "city"].map((field) => (
+            <div key={field}>
+              <Label htmlFor={field}>{field.charAt(0).toUpperCase() + field.slice(1)}</Label>
+              <Input
+                id={field}
+                {...register(field as keyof FormData)}
+                disabled={readOnly} // ✅ disable input in read-only mode
+              />
+              {!readOnly && errors[field as keyof FormData] && (
+                <p className="text-red-500 text-sm">
+                  {errors[field as keyof FormData]?.message as string}
+                </p>
+              )}
+            </div>
+          ))}
         </form>
 
-        <SheetFooter className="px-4 pb-4">
-          <Button
-            onClick={handleSubmit((data) => mutation.mutate(data))}
-            disabled={mutation.isPending}
-          >
-            {mutation.isPending ? "Saving..." : "Save Changes"}
-          </Button>
-        </SheetFooter>
+        {!readOnly && (
+          <SheetFooter className="px-4 pb-4">
+            <Button
+              onClick={handleSubmit((data) => mutation.mutate(data))}
+              disabled={mutation.isPending}
+            >
+              {mutation.isPending ? "Saving..." : "Save Changes"}
+            </Button>
+          </SheetFooter>
+        )}
       </SheetContent>
     </Sheet>
   );
