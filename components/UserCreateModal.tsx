@@ -74,31 +74,31 @@ export default function UserCreateModal({ isOpen, onClose }: Props) {
           className="space-y-4 py-4"
           onSubmit={handleSubmit((data) => mutation.mutate(data))}
         >
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
             <Input id="name" {...register("name")} />
           </div>
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="username">Username</Label>
             <Input id="username" {...register("username")} />
           </div>
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" {...register("email")} />
           </div>
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="phone">Phone</Label>
             <Input id="phone" {...register("phone")} />
           </div>
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="website">Website</Label>
             <Input id="website" {...register("website")} />
           </div>
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="company">Company</Label>
             <Input id="company" {...register("company")} />
           </div>
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="city">City</Label>
             <Input id="city" {...register("city")} />
           </div>
