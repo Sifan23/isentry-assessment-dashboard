@@ -32,13 +32,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown } from "lucide-react"
+import type { User } from "./columns"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends User, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -46,6 +47,7 @@ export function DataTable<TData, TValue>({
   const [rowSelection, setRowSelection] = useState({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [globalFilter, setGlobalFilter] = useState("")
 
   const table = useReactTable({
     data,
@@ -58,11 +60,26 @@ export function DataTable<TData, TValue>({
     onRowSelectionChange: setRowSelection,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
+    onGlobalFilterChange: setGlobalFilter,
     state: {
       sorting,
       rowSelection,
       columnFilters,
       columnVisibility,
+      globalFilter,
+    },
+    globalFilterFn: (row, columnId, filterValue) => {
+      const search = filterValue.toLowerCase()
+      const user = row.original as User
+
+      return (
+        user.name.toLowerCase().includes(search) ||
+        user.email.toLowerCase().includes(search) ||
+        user.username.toLowerCase().includes(search) ||
+        user.phone.toLowerCase().includes(search) ||
+        user.website.toLowerCase().includes(search) ||
+        user.company?.name.toLowerCase().includes(search)
+      )
     },
   })
 
@@ -71,13 +88,9 @@ export function DataTable<TData, TValue>({
 
       <div className="flex items-center gap-2 py-2">
         <Input
-          placeholder="Search by name or email..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => {
-            const value = event.target.value
-            table.getColumn("name")?.setFilterValue(value)
-            table.getColumn("email")?.setFilterValue(value)
-          }}
+          placeholder="Search by any field..."
+          value={globalFilter ?? ""}
+          onChange={(e) => setGlobalFilter(e.target.value)}
           className="max-w-sm"
         />
 
@@ -104,7 +117,6 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-
 
       <div className="overflow-hidden rounded-md border">
         <Table>
@@ -149,7 +161,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      {/* ⏩ Pagination */}
+
       <DataTablePagination table={table} />
     </div>
   )
