@@ -15,6 +15,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import Welcome from "@/components/Welcome";
 
 export default function Dashboard() {
   const { data: users, isLoading, isError } = useUsers();
@@ -60,7 +61,7 @@ export default function Dashboard() {
 
   return (
     <main className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+      <Welcome />
 
        {/* KPI Cards  */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">

@@ -11,7 +11,7 @@ const Welcome = () => {
     <Card
       className={`w-full ${
         isDark ? "bg-primary-foreground" : "bg-blue-100"
-      } p-1 rounded-lg`}
+      } p-1 mb-5 rounded-lg`}
     >
       <CardContent className="flex flex-col justify-center p-6">
         <div className="flex ">
@@ -21,7 +21,7 @@ const Welcome = () => {
           <div className="flex flex-col pl-2 gap-2 mb-2">
             <h1 className="text-3xl font-bold">Welcome back, John Doe!</h1>
             <p className="text-sm text-muted-foreground ">
-              Stay updated with the latest from NexaWorks
+              Stay updated with the latest from ISentry
             </p>
           </div>
         </div>

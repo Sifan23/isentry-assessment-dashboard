@@ -20,8 +20,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "isentry",
-  description: "isentry assessment dashboard",
+  title: "Isentry",
+  description: "Isentry assessment dashboard",
   icons: {
     icon: [
       { url: "/logo.png", rel: "icon", type: "image/png" },
