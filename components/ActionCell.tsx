@@ -2,8 +2,19 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import UserEditSheet from "@/hooks/userEditSheet";
-import { User} from "@/hooks/useUsers";
+import { User } from "@/hooks/useUsers";
 import { useDeleteUser } from "@/hooks/useUsers";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 type Props = {
   user: User;
@@ -15,24 +26,42 @@ export default function ActionCell({ user }: Props) {
 
   return (
     <>
+      {/* Edit Button */}
       <Button variant="ghost" size="sm" onClick={() => setOpen(true)}>
         Edit
       </Button>
 
+      {/* Delete with AlertDialog */}
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <Button variant="destructive" size="sm" disabled={isLoading}>
+            {isLoading ? "Deleting..." : "Delete"}
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Delete {user.name}?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently remove{" "}
+              <span className="font-semibold">{user.name}</span> from the users
+              list.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => deleteUser(user.id)}
+              className="bg-destructive text-white hover:bg-destructive/90"
+            >
+              Confirm Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
-      <Button
-        variant="destructive"
-        size="sm"
-        onClick={() => {
-          if (confirm(`Are you sure you want to delete ${user.name}?`)) {
-            deleteUser(user.id); 
-          }
-        }}
-        disabled={isLoading} 
-      >
-        {isLoading ? "Deleting..." : "Delete"}
-      </Button>
-
+      {/* Edit Sheet */}
       <UserEditSheet
         user={user}
         open={open}
