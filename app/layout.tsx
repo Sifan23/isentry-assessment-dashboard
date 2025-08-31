@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { ReactQueryProvider } from "@/components/providers/ReactQueryProvider";
 import { cookies } from "next/headers";
+import { Toaster } from "@/components/ui/sonner"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   description:
     "isentry assessment dashboard",
   icons: {
-    icon: "",
+    icon: "/logo.png",
   },
 };
 
@@ -53,6 +54,7 @@ export default async function RootLayout({
               <Navbar />
               <div className="px-4">{children}</div>
             </main>
+            <Toaster richColors position="top-right" />
           </SidebarProvider>
         </ThemeProvider>
         </ReactQueryProvider>

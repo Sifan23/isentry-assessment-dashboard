@@ -108,7 +108,7 @@ export default function UserCreateModal({ isOpen, onClose }: Props) {
               <Button variant="outline">Cancel</Button>
             </DialogClose>
             <Button type="submit">
-              {mutation.isLoading ? "Adding..." : "Add User"}
+              Add User
             </Button>
           </DialogFooter>
         </form>
