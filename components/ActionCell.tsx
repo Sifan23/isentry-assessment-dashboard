@@ -30,7 +30,7 @@ type Props = {
 export default function ActionCell({ user }: Props) {
   const [editOpen, setEditOpen] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
-  const { mutate: deleteUser, isLoading } = useDeleteUser();
+  const { mutate: deleteUser } = useDeleteUser();
 
   return (
     <div className="flex items-center gap-2">
@@ -73,7 +73,7 @@ export default function ActionCell({ user }: Props) {
                 variant="destructive"
                 size="sm"
                 className="p-2"
-                disabled={isLoading}
+                
               >
                 <Trash2 className="h-4 w-4" />
               </Button>
