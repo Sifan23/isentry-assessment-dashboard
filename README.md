@@ -22,7 +22,7 @@ The goal of this project is to demonstrate clean UI implementation, modular Reac
 
 ```bash
 git clone https://github.com/Sifan23/isentry-assessment-dashboard.git
-cd <your-repo-name>
+cd isentry-assessment-dashboard
 ````
 
 ### 2. Install dependencies
@@ -113,7 +113,7 @@ The project is configured for **Vercel deployment**.
 * **Data Fetching** using **Axios** & **Tanstack Query** for efficient API calls.
 * **Form Handling** with **React Hook Form** and **Yup** for validation.
 * **Responsive Layout** (works on desktop & mobile).
-* **Reusable Card UI** for settings modules.
+* **Reusable Components** for dashboard, settings,ActionCell modules.
 
 
 ---
