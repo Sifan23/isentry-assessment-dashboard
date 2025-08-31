@@ -68,10 +68,6 @@ export const columns: ColumnDef<User>[] = [
     ),
   },
   {
-    accessorKey: "phone",
-    header: "Phone",
-  },
-  {
     accessorKey: "website",
     header: "Website",
   },
