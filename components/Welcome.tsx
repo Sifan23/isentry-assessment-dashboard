@@ -14,13 +14,16 @@ const Welcome = () => {
       } p-1 mb-5 rounded-lg`}
     >
       <CardContent className="flex flex-col justify-center p-6">
-        <div className="flex ">
+        <div className="flex">
           <div className="text-blue-500 pt-4">
             <Sparkles size={25} />
           </div>
           <div className="flex flex-col pl-2 gap-2 mb-2">
-            <h1 className="text-3xl font-bold">Welcome back, John Doe!</h1>
-            <p className="text-sm text-muted-foreground ">
+            {/* Responsive heading */}
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+              Welcome back, John Doe!
+            </h1>
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Stay updated with the latest from ISentry
             </p>
           </div>
