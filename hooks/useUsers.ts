@@ -1,5 +1,5 @@
 // hooks/useUsers.ts
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "@/lib/api";
 
 export type User = {
@@ -22,5 +22,24 @@ export function useUsers() {
   return useQuery({
     queryKey: ["users"],
     queryFn: fetchUsers,
+  });
+}
+
+// Update user mutation 
+async function updateUser(user: User): Promise<User> {
+  const { data } = await api.put<User>(`/users/${user.id}`, user);
+  return data;
+}
+
+export function useUpdateUser() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateUser,
+    onSuccess: (updatedUser) => {
+      // Optimistically update cache
+      queryClient.setQueryData<User[]>(["users"], (oldUsers = []) =>
+        oldUsers.map((u) => (u.id === updatedUser.id ? updatedUser : u))
+      );
+    },
   });
 }
