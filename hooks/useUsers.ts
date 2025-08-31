@@ -43,3 +43,35 @@ export function useUpdateUser() {
     },
   });
 }
+
+// Delete user mutation
+export function useDeleteUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation<number, Error, number>({
+    mutationFn: async (id: number) => {
+      await api.delete(`/users/${id}`); 
+      return id;
+    },
+    onMutate: async (id: number) => {
+      await queryClient.cancelQueries({ queryKey: ["users"] });
+
+      const previousUsers = queryClient.getQueryData<User[]>(["users"]);
+
+
+      queryClient.setQueryData<User[]>(
+        ["users"],
+        previousUsers?.filter((u) => u.id !== id) ?? []
+      );
+
+      return { previousUsers };
+    },
+    onError: (_err, _id, context: any) => {
+      if (context?.previousUsers) {
+        queryClient.setQueryData(["users"], context.previousUsers);
+      }
+    },
+  });
+}
+
+
