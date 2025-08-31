@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description:
     "isentry assessment dashboard",
   icons: {
-    icon: "",
+    icon: "/logo.png",
   },
 };
 
