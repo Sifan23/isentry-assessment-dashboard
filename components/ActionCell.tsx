@@ -21,13 +21,19 @@ type Props = {
 };
 
 export default function ActionCell({ user }: Props) {
-  const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [viewOpen, setViewOpen] = useState(false);
   const { mutate: deleteUser, isLoading } = useDeleteUser();
 
   return (
     <>
+      {/* View Button */}
+      <Button variant="outline" size="sm" onClick={() => setViewOpen(true)}>
+        View
+      </Button>
+
       {/* Edit Button */}
-      <Button variant="ghost" size="sm" onClick={() => setOpen(true)}>
+      <Button variant="ghost" size="sm" onClick={() => setEditOpen(true)}>
         Edit
       </Button>
 
@@ -64,8 +70,16 @@ export default function ActionCell({ user }: Props) {
       {/* Edit Sheet */}
       <UserEditSheet
         user={user}
-        open={open}
-        onClose={() => setOpen(false)}
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+      />
+
+      {/* View Sheet (Read-Only) */}
+      <UserEditSheet
+        user={user}
+        open={viewOpen}
+        onClose={() => setViewOpen(false)}
+        readOnly 
       />
     </>
   );
